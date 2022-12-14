@@ -6,6 +6,7 @@ import { FilesListDataSource, FilesListItem } from './files-list-datasource';
 import { MatMenuTrigger } from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {SelectionModel} from '@angular/cdk/collections';
+import { EventEmitter } from '@angular/core';
 
 
 
@@ -21,7 +22,7 @@ export class FilesListComponent implements AfterViewInit {
   dataSource: FilesListDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['select', 'id', 'name', 'type', 'owner'];
+  displayedColumns = ['select', 'id', 'type', 'name', 'owner'];
   selection = new SelectionModel<FilesListItem>(true, []);
 
 
@@ -50,4 +51,19 @@ export class FilesListComponent implements AfterViewInit {
           this.dataSource.data.forEach(row => this.selection.select(row));
     }
 
+    deleteOne = new EventEmitter<any>();
+    delete($event: MouseEvent){
+      console.log('Working delete');
+      let a = '';
+      for (let item of this.selection.selected) {
+        console.log(item.id);
+        a += item.name + ' '
+      }
+
+      console.log('You wanted delete ' + a)
+
+    }
+
 }
+
+

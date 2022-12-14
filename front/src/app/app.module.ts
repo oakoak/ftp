@@ -10,13 +10,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import { ButtonDownloadComponent } from './button-download/button-download.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilesListComponent
+    FilesListComponent,
+    ButtonDownloadComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

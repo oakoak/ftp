@@ -3,3 +3,18 @@
 .full-width-table {
   width: 100%;
 }
+
+.container {
+  display: flex;
+  padding: 1em;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.button {
+  padding: 10px;
+}
+
+.paginator {
+  margin-left: auto;
+}

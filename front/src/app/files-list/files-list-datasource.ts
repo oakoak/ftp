@@ -17,7 +17,7 @@ const EXAMPLE_DATA: FilesListItem[] = [
   {id: 1, name: 'Hydrogen' , type: 'text', owner: 'Roman'},
   {id: 2, name: 'Helium'   , type: 'folder', owner: 'Roman'},
   {id: 3, name: 'Lithium'  , type: 'pic', owner: 'Roman'},
-  {id: 4, name: 'Beryllium', type: 'other', owner: 'Roman'},
+  {id: 4, name: 'Beryllium', type: 'flight_land', owner: 'Roman'},
 ];
 
 /**
