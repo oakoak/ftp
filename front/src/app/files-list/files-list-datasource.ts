@@ -10,14 +10,15 @@ export interface FilesListItem {
   id: number;
   type: string;
   owner: string;
+  link: string;
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: FilesListItem[] = [
-  {id: 1, name: 'Hydrogen' , type: 'text', owner: 'Roman'},
-  {id: 2, name: 'Helium'   , type: 'folder', owner: 'Roman'},
-  {id: 3, name: 'Lithium'  , type: 'pic', owner: 'Roman'},
-  {id: 4, name: 'Beryllium', type: 'flight_land', owner: 'Roman'},
+  {id: 1, name: 'Hydrogen' , type: 'text', owner: 'Roman', link: 'dd'},
+  {id: 2, name: 'Helium'   , type: 'folder', owner: 'Roman', link: 'dd'},
+  {id: 3, name: 'Lithium'  , type: 'pic', owner: 'Roman', link: 'dd'},
+  {id: 4, name: 'Beryllium', type: 'flight_land', owner: 'Roman', link: 'dd'},
 ];
 
 /**

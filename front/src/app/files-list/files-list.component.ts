@@ -7,6 +7,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {SelectionModel} from '@angular/cdk/collections';
 import { EventEmitter } from '@angular/core';
+import { Renderer2 } from '@angular/core'
 
 
 
@@ -63,6 +64,17 @@ export class FilesListComponent implements AfterViewInit {
       console.log('You wanted delete ' + a)
 
     }
+
+
+    downloadOne  = new EventEmitter<any>();
+    download($event: MouseEvent){
+      const link = document.createElement('a');
+      link.setAttribute('target', '_blank');
+      link.setAttribute('href', 'abc.net/files/test.ino');
+      link.setAttribute('download', `products.csv`);
+      link.click();
+      link.remove();
+     }
 
 }
 

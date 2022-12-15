@@ -49,6 +49,13 @@
 
   <div class="container">
     <div class="button">
+      <button mat-raised-button
+              [disabled]="this.selection.selected.length == 0"
+              (click)="download($event)">
+        Download
+      </button>
+    </div>
+    <div class="button">
         <button mat-raised-button
                 [disabled]="this.selection.selected.length == 0">
           Copy
