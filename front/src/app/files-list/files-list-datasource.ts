@@ -15,10 +15,10 @@ export interface FilesListItem {
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: FilesListItem[] = [
-  {id: 1, name: 'Hydrogen' , type: 'text', owner: 'Roman', link: 'dd'},
-  {id: 2, name: 'Helium'   , type: 'folder', owner: 'Roman', link: 'dd'},
-  {id: 3, name: 'Lithium'  , type: 'pic', owner: 'Roman', link: 'dd'},
-  {id: 4, name: 'Beryllium', type: 'flight_land', owner: 'Roman', link: 'dd'},
+  {id: 1, name: 'Hydrogen' , type: 'text', owner: 'Roman', link: 'https://www.clickdimensions.com/links/TestPDFfile.pdf'},
+  {id: 2, name: 'Helium'   , type: 'folder', owner: 'Roman', link: 'https://www.clickdimensions.com/links/TestPDFfile.pdf'},
+  {id: 3, name: 'Lithium'  , type: 'pic', owner: 'Roman', link: 'https://www.clickdimensions.com/links/TestPDFfile.pdf'},
+  {id: 4, name: 'Beryllium', type: 'flight_land', owner: 'Roman', link: 'abc.net/files/test.ino'},
 ];
 
 /**

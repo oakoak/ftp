@@ -68,14 +68,15 @@ export class FilesListComponent implements AfterViewInit {
 
     downloadOne  = new EventEmitter<any>();
     download($event: MouseEvent){
-      const link = document.createElement('a');
-      link.setAttribute('target', '_blank');
-      link.setAttribute('href', 'abc.net/files/test.ino');
-      link.setAttribute('download', `products.csv`);
-      link.click();
-      link.remove();
+      for (let item of this.selection.selected) {
+        const link = document.createElement('a');
+        link.setAttribute('target', '_blank');
+        link.setAttribute('href', item.link);
+        link.setAttribute('download', item.name);
+        link.click();
+        link.remove();
+      }
      }
-
 }
 
 
