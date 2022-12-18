@@ -11,7 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
-import { ButtonDownloadComponent } from './button-download/button-download.component';
+import { ButtonComponent } from './button/button.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NavigateComponent } from './navigate/navigate.component';
+
 
 
 
@@ -19,7 +22,8 @@ import { ButtonDownloadComponent } from './button-download/button-download.compo
   declarations: [
     AppComponent,
     FilesListComponent,
-    ButtonDownloadComponent
+    ButtonComponent,
+    NavigateComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,7 @@ import { ButtonDownloadComponent } from './button-download/button-download.compo
     MatCheckboxModule,
     MatIconModule,
     MatButtonModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

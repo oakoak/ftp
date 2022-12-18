@@ -15,7 +15,7 @@ describe('FilesListComponent', () => {
       declarations: [ FilesListComponent ],
       imports: [
         NoopAnimationsModule,
-        MatPaginatorModule,
+        //MatPaginatorModule,
         MatSortModule,
         MatTableModule,
       ]

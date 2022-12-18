@@ -1,5 +1,6 @@
 <div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <table mat-table [dataSource]="dataSource" class="full-width-table" matSort
+         aria-label="Elements">
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
@@ -41,48 +42,9 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-        (click)="selection.toggle(row)">
+        (click)="selection.toggle(row)"
+        (dblclick)="openFile(row)"
+    >
     </tr>
   </table>
-
-
-
-  <div class="container">
-    <div class="button">
-      <button mat-raised-button
-              [disabled]="this.selection.selected.length == 0"
-              (click)="download($event)">
-        Download
-      </button>
-    </div>
-    <div class="button">
-        <button mat-raised-button
-                [disabled]="this.selection.selected.length == 0">
-          Copy
-        </button>
-      </div>
-    <div class="button">
-      <button mat-raised-button
-              [disabled]="this.selection.selected.length == 0">
-        Move
-      </button>
-    </div>
-    <div class="button">
-      <button mat-raised-button color="warn"
-              (click)="delete($event)"
-              [disabled]="this.selection.selected.length == 0">
-        Delete
-      </button>
-    </div>
-    <div class="paginator">
-      <mat-paginator #paginator
-          [length]="dataSource.data.length"
-          [pageIndex]="0"
-          [pageSize]="10"
-          [pageSizeOptions]="[5, 10, 20]"
-          aria-label="Select page"
-          >
-      </mat-paginator>
-    </div>
-  </div>
 </div>
