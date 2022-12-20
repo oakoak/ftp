@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-
-import { Subject } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { File } from './file'
+
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 
 import {HOME, Helium} from './mock-files'
 
@@ -9,29 +10,31 @@ import {HOME, Helium} from './mock-files'
   providedIn: 'root'
 })
 
-
 export class FilesService {
-  currentFolderId:number | undefined;
-  currentFiles:File[];
-  subject:Subject<number>;
+  private filesUrl = 'http://localhost:8080/files';  // URL to web api
+  path:BehaviorSubject<string>;
+  files:BehaviorSubject<File[]>;
 
-  constructor() {
-    this.currentFolderId = 0;
-    this.currentFiles = HOME;
-    this.subject = new Subject<number>()
+
+  getFiles(path:string){
+    const url = `${this.filesUrl}?path=${path}`;
+    return  this.http.get<File[]>(url).subscribe(v => {
+      this.files.next(v)
+      this.path.next(path)
+    });
   }
 
-  changeFolder(folderId: number | undefined) {
-    if (this.currentFolderId == folderId)
-      return;
-    if (folderId == 0) {
-      this.currentFiles = HOME;
-    } else {
-      this.currentFiles = Helium;
+  constructor(private http:HttpClient) {
+    this.path = new BehaviorSubject<string>('/home')
+
+    this.files = new BehaviorSubject<File[]>([])
+
+    this.changeFolder('/home')
+  }
+
+  changeFolder(path: string | undefined) {
+    if (path) {
+      this.getFiles(path);
     }
-    this.currentFolderId = folderId;
-    this.subject.next(0)
   }
 }
-
-export var files = new FilesService();

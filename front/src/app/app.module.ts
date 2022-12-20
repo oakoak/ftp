@@ -23,7 +23,7 @@ import { NavigateComponent } from './navigate/navigate.component';
     AppComponent,
     FilesListComponent,
     ButtonComponent,
-    NavigateComponent
+    NavigateComponent,
   ],
   imports: [
     BrowserModule,

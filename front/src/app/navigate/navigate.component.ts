@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {files, FilesService} from '../files.service'
+import {FilesService} from '../files.service'
 
 @Component({
   selector: 'app-navigate',
@@ -7,8 +7,12 @@ import {files, FilesService} from '../files.service'
   styleUrls: ['./navigate.component.css']
 })
 export class NavigateComponent {
+  path: string | undefined
+  constructor(private files: FilesService) {
+    this.files.path.subscribe(value => this.path = value)
+  }
   toHomeFolder() {
-    files.changeFolder(0);
+    this.files.changeFolder('/home');
   }
 
 }

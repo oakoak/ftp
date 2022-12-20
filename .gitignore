@@ -44,4 +44,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/ftp-backend
+ftp-backend/target/
+ftp-backend/.mvn/
