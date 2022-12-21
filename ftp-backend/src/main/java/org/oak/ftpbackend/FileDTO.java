@@ -3,6 +3,8 @@ package org.oak.ftpbackend;
 
 
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -10,14 +12,14 @@ public class FileDTO {
     private String name;
     private Boolean isFolder;
     private String path;
-    private Timestamp createdTime;
+    private Date createdTime;
 
     public FileDTO(String name, Boolean isFolder, String path) {
         super();
         this.name = name;
         this.isFolder = isFolder;
         this.path = path;
-        this.createdTime = new Timestamp(new Date().getTime());
+        this.createdTime = new Date();
     }
 
     public FileDTO() {
@@ -48,7 +50,7 @@ public class FileDTO {
         this.path = path;
     }
 
-    public Timestamp getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 

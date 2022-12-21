@@ -21,7 +21,6 @@
       <version>3.0.0</version>
     </dependency>
 
-
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -30,6 +29,12 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.14.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ftp-backend</finalName>

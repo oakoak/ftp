@@ -10,7 +10,7 @@ public class LocalFileService implements FileService{
     public List<FileDTO> getFile(String path) {
         File folder = new File(path);
 
-        List<FileDTO> tmpListFile = new ArrayList<>();
+        List<FileDTO> tmpListFile = new ArrayList<>(folder.listFiles().length);
 
         for (File i: folder.listFiles()) {
             tmpListFile.add(new FileDTO(i.getName(), i.isDirectory(), i.getPath()));
