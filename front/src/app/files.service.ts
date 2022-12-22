@@ -19,6 +19,7 @@ export class FilesService {
   getFiles(path:string){
     const url = `${this.filesUrl}?path=${path}`;
     return  this.http.get<File[]>(url).subscribe(v => {
+      console.log(v)
       this.files.next(v)
       this.path.next(path)
     });
@@ -33,6 +34,7 @@ export class FilesService {
   }
 
   changeFolder(path: string | undefined) {
+    console.log(path)
     if (path) {
       this.getFiles(path);
     }

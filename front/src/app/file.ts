@@ -3,13 +3,13 @@ export class File {
   type: string | undefined;
   owner: string | undefined;
   createdTime: Date | undefined;
-  folder:boolean | undefined;
+  isFolder:boolean | undefined;
   path: string | undefined;
 
-  constructor(name: string | undefined, path: string | undefined, createdTime: Date | undefined, folder: boolean | undefined) {
+  constructor(name: string | undefined, path: string | undefined, createdTime: Date | undefined, isFolder: boolean | undefined) {
     this.name = name
     this.path = path
-    this.folder = folder
+    this.isFolder = isFolder
     this.createdTime = createdTime
   }
 }

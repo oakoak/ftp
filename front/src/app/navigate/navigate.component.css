@@ -3,6 +3,7 @@
 
 .button {
   margin: 5px;
+  float: left;
 }
 
 
@@ -11,3 +12,13 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+
+.container {
+  display: flex;
+  padding: 1em;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+

@@ -1,11 +1,5 @@
 package org.oak.ftpbackend;
 
-
-
-
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class FileDTO {
@@ -13,13 +7,33 @@ public class FileDTO {
     private Boolean isFolder;
     private String path;
     private Date createdTime;
+    private Long size;
 
-    public FileDTO(String name, Boolean isFolder, String path) {
+    public FileDTO(String name, Boolean isFolder, String path, Long size) {
         super();
         this.name = name;
         this.isFolder = isFolder;
         this.path = path;
         this.createdTime = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "FileDTO{" +
+                "name='" + name + '\'' +
+                ", isFolder=" + isFolder +
+                ", path='" + path + '\'' +
+                ", createdTime=" + createdTime +
+                ", size=" + size +
+                '}';
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     public FileDTO() {
@@ -34,11 +48,11 @@ public class FileDTO {
         this.name = name;
     }
 
-    public Boolean getFolder() {
+    public Boolean getIsFolder() {
         return isFolder;
     }
 
-    public void setFolder(Boolean folder) {
+    public void setIsFolder(Boolean folder) {
         isFolder = folder;
     }
 
@@ -54,17 +68,9 @@ public class FileDTO {
         return createdTime;
     }
 
-    public void setCreatedTime(Timestamp createdTime) {
+    public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
 
-    @Override
-    public String toString() {
-        return "FileDTO{" +
-                "name='" + name + '\'' +
-                ", isFolder=" + isFolder +
-                ", path='" + path + '\'' +
-                ", createdTime=" + createdTime +
-                '}';
-    }
+
 }

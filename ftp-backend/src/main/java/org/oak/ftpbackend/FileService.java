@@ -4,5 +4,5 @@ import java.util.List;
 
 
 public interface FileService {
-    List<FileDTO> getFile(String path);
+    List<FileDTO> getListFiles(String path);
 }

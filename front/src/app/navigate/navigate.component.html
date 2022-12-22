@@ -1,4 +1,6 @@
 <div class="flex-container">
-<button mat-icon-button class="button" (click)="toHomeFolder()"><mat-icon class="icon-display">home</mat-icon></button>
+<button mat-raised-button  (click)="toHomeFolder()"><mat-icon class="icon-display">home</mat-icon></button>
+    <button mat-raised-button *ngFor="let folder of this.splitPath; index as i" (click)="toFolder(i)">
+      /{{ folder }}
+    </button>
 </div>
-{{ this.path }}

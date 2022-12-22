@@ -18,8 +18,14 @@ export class FilesListComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<File>;
   dataSource = new MatTableDataSource(this.files.files.value);
 
+  mapIconType: Record<string, string> = {
+    "pdf":"picture_as_pdf",
+    "doc":"description",
+    "docx":"description"
+  }
 
-  displayedColumns = ['select', 'id', 'type', 'name', 'owner'];
+
+  displayedColumns = ['select', 'type', 'name'];
   selection = new SelectionModel<File>(true, []);
 
   constructor(private files: FilesService) {
@@ -47,7 +53,9 @@ export class FilesListComponent implements AfterViewInit {
   }
 
   openFile(row: File) {
-    if (row.folder){
+    console.log(row)
+    if (row.isFolder){
+      console.log(row)
       this.files.changeFolder(row.path);
     }
   }
