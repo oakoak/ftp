@@ -1,5 +1,3 @@
-<p>button works!</p>
-<!--
 <div class="container">
   <div class="button">
     <button type="button" mat-raised-button (click)="fileInput.click()" color="green">Upload files</button>
@@ -8,12 +6,13 @@
 
   <div class="button">
     <button mat-raised-button
-            [disabled]="this.selection.selected.length == 0"
-            (click)="download($event)">
+            [disabled]="selection?.isEmpty()"
+            (click)="downloadselected()">
       Download
     </button>
   </div>
 
+<!--
   <div class="button">
     <button mat-raised-button
             [disabled]="this.selection.selected.length == 0">
@@ -35,5 +34,6 @@
       Delete
     </button>
   </div>
-</div>
 -->
+</div>
+

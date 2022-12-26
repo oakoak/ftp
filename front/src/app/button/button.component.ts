@@ -1,4 +1,7 @@
-import {Component, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input} from '@angular/core';
+import {SelectionModel} from "@angular/cdk/collections";
+import {File} from "../file";
+import {FilesService} from "../files.service";
 
 @Component({
   selector: 'app-button',
@@ -6,34 +9,19 @@ import {Component, EventEmitter} from '@angular/core';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
+  @Input() selection: SelectionModel<File> | undefined;
 
-/*
-  deleteOne = new EventEmitter<any>();
-  delete($event: MouseEvent){
-    console.log('Working delete');
-    let a = '';
-    for (let item of this.selection.selected) {
-      console.log(item.id);
-      a += item.name + ' '
+  constructor(private files: FilesService) {}
+
+    downloadselected () {
+    if (this.selection)
+    for (let row of this.selection.selected) {
+      if (!row.isFolder) {
+        this.files.loadFile(row.path)
+      }
     }
-
-    console.log('You wanted delete ' + a)
-
   }
 
 
-  downloadOne  = new EventEmitter<any>();
-  download($event: MouseEvent){
-    for (let item of this.selection.selected) {
-      if (item.link) {
-        const link = document.createElement('a');
-        link.setAttribute('target', '_blank');
-        link.setAttribute('href', item.link);
-        link.setAttribute('download', item.name + '.' + item.type);
-        link.click();
-        link.remove();
-      }
-    }
-  }*/
 
 }

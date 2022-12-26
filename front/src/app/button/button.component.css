@@ -1,0 +1,24 @@
+.icon-display {
+}
+
+.button {
+  margin: 5px;
+  float: left;
+}
+
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+.container {
+  display: flex;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+

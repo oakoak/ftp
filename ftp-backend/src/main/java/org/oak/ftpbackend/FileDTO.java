@@ -9,12 +9,13 @@ public class FileDTO {
     private Date createdTime;
     private Long size;
 
-    public FileDTO(String name, Boolean isFolder, String path, Long size) {
+    public FileDTO(String name, Boolean isFolder, String path, Long size, Long createdTime) {
         super();
         this.name = name;
         this.isFolder = isFolder;
         this.path = path;
-        this.createdTime = new Date();
+        this.createdTime = new Date(createdTime);
+        this.size = size;
     }
 
     @Override

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FilesService} from '../files.service'
+import { FilesService } from '../files.service'
 
 @Component({
   selector: 'app-navigate',
@@ -11,10 +11,10 @@ export class NavigateComponent {
   splitPath: string[] | undefined;
 
   constructor(private files: FilesService) {
-    this.files.path.subscribe(value => {
+    this.files.path$.subscribe(value => {
       this.path = value
       this.splitPath = this.path.replace(/^\/home/,"")
-        .replace(/\//, "").split("/")
+        .replace(/^\//, "").split("/")
     })
   }
 
