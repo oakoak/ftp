@@ -14,6 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button/button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigateComponent } from './navigate/navigate.component';
+import {
+  DialogUploadButton,
+  UploadButtonComponent
+} from './upload-button/upload-button.component';
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatListModule} from "@angular/material/list";
 
 
 
@@ -24,19 +32,25 @@ import { NavigateComponent } from './navigate/navigate.component';
     FilesListComponent,
     ButtonComponent,
     NavigateComponent,
+    UploadButtonComponent,
+    DialogUploadButton,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatButtonModule,
+        HttpClientModule,
+        MatSelectModule,
+        FormsModule,
+        MatDialogModule,
+        MatListModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -3,29 +3,36 @@ package org.oak.ftpbackend;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://10.0.0.33:16000")
+@CrossOrigin("http://localhost:4200")
 public class FileController {
-    private  static final FileService fileService = new LocalFileService();
+    private  FileService fileService;
 
-    @RequestMapping("/files")
+    FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/folder")
     public List<FileDTO> read(@RequestParam(value = "path", defaultValue = "/home") String path) {
-        System.out.println(fileService.getListFiles(path));
         return fileService.getListFiles(path);
     }
 
-    @RequestMapping("/file")
-    public ResponseEntity<Resource> uploadFile(@RequestParam(value = "path") String fileName) {
+    @GetMapping("/file")
+    public ResponseEntity<Resource> loadFile(@RequestParam(value = "path") String fileName) {
         Resource file = fileService.load(fileName);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @PostMapping("/file")
+    public void uploadFile(@RequestParam(value = "path") String folder, @RequestParam("file") MultipartFile file) throws IOException {
+        fileService.save(file, folder);
     }
 }
 

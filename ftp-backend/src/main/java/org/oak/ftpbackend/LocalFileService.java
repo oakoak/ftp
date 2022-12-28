@@ -2,14 +2,17 @@ package org.oak.ftpbackend;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class LocalFileService implements FileService{
     @Override
     public List<FileDTO> getListFiles(String path) {
@@ -24,8 +27,14 @@ public class LocalFileService implements FileService{
     }
 
     @Override
-    public void save(MultipartFile file) {
-
+    public void save(MultipartFile file, String folder) {
+        try {
+            File tmpFile = new File(folder + '/' + file.getOriginalFilename());
+            file.transferTo(tmpFile);
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     @Override

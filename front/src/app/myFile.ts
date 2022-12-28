@@ -1,4 +1,4 @@
-export class File {
+export class myFile {
   name: string | undefined;
   type: string | undefined;
   owner: string | undefined;

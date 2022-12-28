@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import { File } from './file'
+import { myFile } from './myFile'
 
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import { saveAs } from 'file-saver';
 
@@ -12,15 +12,14 @@ import { saveAs } from 'file-saver';
 })
 
 export class FilesService {
-  private filesUrl = 'http://10.0.0.33:8080/files';  // URL to web api
+  private baseApiUrl = 'http://localhost:8080';  // URL to web api
   path$:BehaviorSubject<string>;
-  files$:BehaviorSubject<File[]>;
-//  selectedFiles:BehaviorSubject<File[]>;
-
+  files$:BehaviorSubject<myFile[]>;
 
   getFiles(path:string){
-    const url = `${this.filesUrl}?path=${path}`;
-    return  this.http.get<File[]>(url).subscribe(v => {
+    let httpParams = new HttpParams().set('path', path)
+
+    return  this.http.get<myFile[]>(`${this.baseApiUrl}/folder`, {params:httpParams}).subscribe(v => {
       for (let i of v) {
         i.createdTime = new Date(String(i.createdTime));
       }
@@ -30,9 +29,8 @@ export class FilesService {
   }
 
   constructor(private http:HttpClient) {
-    this.path$ = new BehaviorSubject<string>('/home')
-
-    this.files$ = new BehaviorSubject<File[]>([])
+    this.path$ = new BehaviorSubject<string>('')
+    this.files$ = new BehaviorSubject<myFile[]>([])
 
     this.changeFolder('/home')
   }
@@ -45,11 +43,14 @@ export class FilesService {
 
   loadFile(fileName: string | undefined) {
     if (fileName){
-      saveAs(fileName);
+      saveAs(`${this.baseApiUrl}/file?path=${fileName}`, fileName.split("/").slice(-1)[0]);
     }
   }
 
-  uploadFile(){
-
+  uploadFile(file: File):Observable<any> {
+    const formData = new FormData();
+    formData.append("file", file, file.name,);
+    formData.append('path', this.path$.value)
+    return this.http.post(`${this.baseApiUrl}/file`, formData)
   }
 }

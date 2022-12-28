@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
-import {File} from "../file";
+import {myFile} from "../myFile";
 import {FilesService} from "../files.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {FilesService} from "../files.service";
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  @Input() selection: SelectionModel<File> | undefined;
+  @Input() selection: SelectionModel<myFile> | undefined;
 
   constructor(private files: FilesService) {}
 
@@ -21,7 +21,4 @@ export class ButtonComponent {
       }
     }
   }
-
-
-
 }

@@ -4,7 +4,7 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import prettyBytes from 'pretty-bytes';
 
-import {File} from "../file"
+import {myFile} from "../myFile"
 import {FilesService} from "../files.service"
 import {BehaviorSubject, Observable} from "rxjs";
 
@@ -17,7 +17,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class FilesListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<File>;
+  @ViewChild(MatTable) table!: MatTable<myFile>;
   dataSource = new MatTableDataSource(this.files.files$.value);
   prettyBytes = prettyBytes;
   mapIconType: Record<string, string> = {
@@ -28,7 +28,7 @@ export class FilesListComponent implements AfterViewInit {
 
 
   displayedColumns = ['select', 'type', 'name', 'size', 'createdTime'];
-  selection = new SelectionModel<File>(true, []);
+  selection = new SelectionModel<myFile>(true, []);
 
   constructor(private files: FilesService) {
     this.files.files$.subscribe((dataFiles) => {
@@ -54,7 +54,7 @@ export class FilesListComponent implements AfterViewInit {
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  openFile(row: File) {
+  openFile(row: myFile) {
     if (row.isFolder){
       this.files.changeFolder(row.path);
     }

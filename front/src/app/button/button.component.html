@@ -1,17 +1,14 @@
 <div class="container">
   <div class="button">
-    <button type="button" mat-raised-button (click)="fileInput.click()" color="green">Upload files</button>
-  </div>
-  <input hidden #fileInput type="file" id="file">
-
-  <div class="button">
     <button mat-raised-button
             [disabled]="selection?.isEmpty()"
             (click)="downloadselected()">
       Download
     </button>
   </div>
-
+  <div class="button">
+    <app-upload-button></app-upload-button>
+  </div>
 <!--
   <div class="button">
     <button mat-raised-button
