@@ -52,14 +52,13 @@ export class FilesService {
     const formData = new FormData()
     formData.append("file", file, file.name,)
     formData.append('path', this.path$.value)
-    return this.http.post(`${this.baseApiUrl}/file`, formData)
+    return this.http.put(`${this.baseApiUrl}/file`, formData)
   }
 
   moveFile(source: string, target: string):Observable<any> {
     const formData = new FormData()
     formData.append('source', source)
     formData.append('target', target)
-
     return this.http.post(`${this.baseApiUrl}/movefile`,formData)
   }
 

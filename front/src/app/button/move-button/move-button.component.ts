@@ -57,13 +57,13 @@ export class DialogMoveButton {
     )
   }
 
-  moveselected (target:string[] | null ) {
+  moveselected (target:any ) {
     if (!target) return
-    for (let i of target)
-    if (this.data.selection && this.fileService.path$.value != i) {
+    let i = target[0]
+    if (i && this.fileService.path$.value != i.path && i.path) {
       for (let row of this.data.selection) {
         if (!row.isFolder && row.path) {
-          this.fileService.moveFile(row.path, i + row.name).subscribe(v => console.log(v));
+          this.fileService.moveFile(row.path, i.path + '/' + row.name).subscribe(v => console.log(v));
         }
       }
     }
