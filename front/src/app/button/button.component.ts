@@ -16,9 +16,20 @@ export class ButtonComponent {
     downloadselected () {
     if (this.selection)
     for (let row of this.selection.selected) {
-      if (!row.isFolder) {
+      if (!row.isFolder  && row.path) {
         this.files.loadFile(row.path)
       }
+    }
+  }
+
+  deleteselected () {
+    if (this.selection) {
+      for (let row of this.selection.selected) {
+        if (!row.isFolder && row.path) {
+          this.files.deleteFile(row.path).subscribe(value => {console.log(value)})
+        }
+      }
+      this.files.changeFolder(this.files.path$.value);
     }
   }
 }

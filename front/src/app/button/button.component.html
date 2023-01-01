@@ -6,31 +6,21 @@
       Download
     </button>
   </div>
-  <div class="button">
-    <app-upload-button></app-upload-button>
-  </div>
-<!--
-  <div class="button">
-    <button mat-raised-button
-            [disabled]="this.selection.selected.length == 0">
-      Copy
-    </button>
-  </div>
 
   <div class="button">
     <button mat-raised-button
-            [disabled]="this.selection.selected.length == 0">
-      Move
-    </button>
-  </div>
-
-  <div class="button">
-    <button mat-raised-button color="warn"
-            (click)="delete($event)"
-            [disabled]="this.selection.selected.length == 0">
+            [disabled]="selection?.isEmpty()"
+            (click)="deleteselected()">
       Delete
     </button>
   </div>
--->
+
+  <div class="button">
+    <app-move-button [selection]="selection"></app-move-button>
+  </div>
+
+  <div class="button">
+    <app-upload-button></app-upload-button>
+  </div>
 </div>
 

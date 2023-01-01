@@ -17,11 +17,12 @@ import { NavigateComponent } from './navigate/navigate.component';
 import {
   DialogUploadButton,
   UploadButtonComponent
-} from './upload-button/upload-button.component';
+} from './button/upload-button/upload-button.component';
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatListModule} from "@angular/material/list";
+import {DialogMoveButton, MoveButtonComponent} from './button/move-button/move-button.component';
 
 
 
@@ -34,6 +35,8 @@ import {MatListModule} from "@angular/material/list";
     NavigateComponent,
     UploadButtonComponent,
     DialogUploadButton,
+    MoveButtonComponent,
+    DialogMoveButton
   ],
     imports: [
         BrowserModule,

@@ -18,26 +18,27 @@ export class FilesService {
 
   getFiles(path:string){
     let httpParams = new HttpParams().set('path', path)
-
-    return  this.http.get<myFile[]>(`${this.baseApiUrl}/folder`, {params:httpParams}).subscribe(v => {
-      for (let i of v) {
-        i.createdTime = new Date(String(i.createdTime));
-      }
-      this.files$.next(v)
-      this.path$.next(path)
-    });
+    return  this.http.get<myFile[]>(`${this.baseApiUrl}/folder`, {params:httpParams});
   }
+
+
 
   constructor(private http:HttpClient) {
     this.path$ = new BehaviorSubject<string>('')
     this.files$ = new BehaviorSubject<myFile[]>([])
 
-    this.changeFolder('/home')
+    this.changeFolder('/home/oak/Downloads')
   }
 
   changeFolder(path: string | undefined) {
     if (path) {
-      this.getFiles(path);
+      this.getFiles(path).subscribe(v => {
+        for (let i of v) {
+          i.createdTime = new Date(String(i.createdTime));
+        }
+        this.files$.next(v)
+        this.path$.next(path)
+      });
     }
   }
 
@@ -48,9 +49,24 @@ export class FilesService {
   }
 
   uploadFile(file: File):Observable<any> {
-    const formData = new FormData();
-    formData.append("file", file, file.name,);
+    const formData = new FormData()
+    formData.append("file", file, file.name,)
     formData.append('path', this.path$.value)
     return this.http.post(`${this.baseApiUrl}/file`, formData)
+  }
+
+  moveFile(source: string, target: string):Observable<any> {
+    const formData = new FormData()
+    formData.append('source', source)
+    formData.append('target', target)
+
+    return this.http.post(`${this.baseApiUrl}/movefile`,formData)
+  }
+
+  deleteFile(path: string):Observable<any> {
+    const formData = new FormData()
+    formData.append('path', path)
+
+    return this.http.post(this.baseApiUrl + "/deletefile",formData)
   }
 }

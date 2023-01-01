@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogConfig, MatDialogModule} from '@angular/material/dialog';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FilesService} from '../files.service'
+import {FilesService} from '../../files.service'
 
 
 import prettyBytes from 'pretty-bytes';

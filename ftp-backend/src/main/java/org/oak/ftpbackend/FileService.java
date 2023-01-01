@@ -13,4 +13,8 @@ public interface FileService {
     public void save(MultipartFile file, String folder) throws IOException;
 
     public Resource load(String filename);
+
+    public void move(String source, String target) throws IOException;
+
+    public void delete(String fileName);
 }

@@ -30,9 +30,22 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @PostMapping("/file")
+    @PutMapping("/file")
     public void uploadFile(@RequestParam(value = "path") String folder, @RequestParam("file") MultipartFile file) throws IOException {
         fileService.save(file, folder);
+    }
+
+    @PostMapping("/deletefile")
+    public void deleteFile(@RequestParam(value = "path") String fileName) {
+        System.out.println(fileName);
+        fileService.delete(fileName);
+    }
+
+    @PostMapping("/movefile")
+    public void moveFile(@RequestParam(value = "source") String source,
+                         @RequestParam(value = "target") String target) throws IOException {
+        System.out.println(source + " " + target);
+        fileService.move(source, target);
     }
 }
 
