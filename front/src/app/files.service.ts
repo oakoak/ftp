@@ -17,6 +17,10 @@ export class FilesService {
   files$:BehaviorSubject<myFile[]>;
 
   getFiles(path:string){
+
+    const formData = new FormData()
+    formData.append('path', path)
+
     let httpParams = new HttpParams().set('path', path)
     return  this.http.get<myFile[]>(`${this.baseApiUrl}/folder`, {params:httpParams});
   }
@@ -27,7 +31,7 @@ export class FilesService {
     this.path$ = new BehaviorSubject<string>('')
     this.files$ = new BehaviorSubject<myFile[]>([])
 
-    this.changeFolder('/home/oak/Downloads')
+    this.changeFolder('/home')
   }
 
   changeFolder(path: string | undefined) {
