@@ -49,12 +49,14 @@ public class FileController {
                                      @RequestParam("file") MultipartFile file) {
         try {
             fileService.save(file, folder);
-
-            return ResponseEntity.ok("");
+            String message = "File %s successful upload to %s".formatted(file.getName(), folder);
+            logger.info(message);
+            return ResponseEntity.ok(wrapperMessage(message));
         }
         catch (IOException e) {
-            logger.error("Upload file error: ", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("");
+            String message = "Failed upload file %s".formatted(file.getName());
+            logger.error(message, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(wrapperMessage(message));
         }
     }
 
