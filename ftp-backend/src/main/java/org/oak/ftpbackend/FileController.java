@@ -1,18 +1,29 @@
 package org.oak.ftpbackend;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+
+
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class FileController {
     private  FileService fileService;
+    public static Logger logger = LoggerFactory.getLogger(FileController.class);
+
+    public String wrapperMessage(String message) {
+        return "{\"message\":\"%s\"}".formatted(message);
+    }
 
     FileController(FileService fileService) {
         this.fileService = fileService;
@@ -20,6 +31,7 @@ public class FileController {
 
     @GetMapping("/folder")
     public List<FileDTO> read(@RequestParam(value = "path", defaultValue = "/home") String path) {
+        logger.info("Read folder data for ");
         return fileService.getListFiles(path);
     }
 
@@ -27,25 +39,57 @@ public class FileController {
     public ResponseEntity<Resource> loadFile(@RequestParam(value = "path") String fileName) {
         Resource file = fileService.load(fileName);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + file.getFilename() + "\"")
+                .body(file);
     }
 
     @PutMapping("/file")
-    public void uploadFile(@RequestParam(value = "path") String folder, @RequestParam("file") MultipartFile file) throws IOException {
-        fileService.save(file, folder);
+    public ResponseEntity uploadFile(@RequestParam(value = "path") String folder,
+                                     @RequestParam("file") MultipartFile file) {
+        try {
+            fileService.save(file, folder);
+
+            return ResponseEntity.ok("");
+        }
+        catch (IOException e) {
+            logger.error("Upload file error: ", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("");
+        }
     }
 
     @PostMapping("/deletefile")
-    public void deleteFile(@RequestParam(value = "path") String fileName) {
-        System.out.println(fileName);
-        fileService.delete(fileName);
+    public ResponseEntity deleteFile(@RequestParam(value = "path") String fileName) {
+
+        boolean result = fileService.delete(fileName);
+        if (result) {
+            String message = "File %s successful delete".formatted(fileName);
+            logger.info(message);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(wrapperMessage(message));
+        }
+        String message = "Failed delete file %s".formatted(fileName);
+        logger.error(message);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(wrapperMessage(message));
     }
 
     @PostMapping("/movefile")
-    public void moveFile(@RequestParam(value = "source") String source,
-                         @RequestParam(value = "target") String target) throws IOException {
-        System.out.println(source + " " + target);
-        fileService.move(source, target);
+    public ResponseEntity moveFile(@RequestParam(value = "source") String source,
+                         @RequestParam(value = "target") String target) {
+        logger.info("Moves file from {} to {}", source, target);
+        try {
+            Path result = fileService.move(source, target);
+            String message = "File %s successful move to %s".formatted(result.getFileName(), result.getParent());
+            logger.info(message);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(wrapperMessage(message));
+        }
+        catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(wrapperMessage("Error"));
+        }
     }
 }
 

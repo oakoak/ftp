@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 public class LocalFileService implements FileService{
     @Override
@@ -28,14 +29,16 @@ public class LocalFileService implements FileService{
     }
 
     @Override
-    public void save(MultipartFile file, String folder) {
+    public boolean save(MultipartFile file, String folder) {
         try {
             File tmpFile = new File(folder + '/' + file.getOriginalFilename());
             file.transferTo(tmpFile);
+            return true;
         }
         catch (IOException e) {
             System.out.println(e);
         }
+        return false;
     }
 
     @Override
@@ -54,13 +57,9 @@ public class LocalFileService implements FileService{
     }
 
     @Override
-    public void move(String source, String target) {
+    public Path move(String source, String target) {
         try {
-            System.out.println(source);
-            System.out.println(target);
-            var a = Files.move(Path.of(source), Path.of(target));
-            System.out.println(a);
-
+            return Files.move(Path.of(source), Path.of(target));
         }
         catch (IOException e) {
             throw new RuntimeException("Error: " + e.getMessage());
@@ -68,12 +67,12 @@ public class LocalFileService implements FileService{
     }
 
     @Override
-    public void delete(String fileName) {
+    public boolean delete(String fileName) {
         File file = new File(fileName);
         if (!file.exists()) {
             throw new RuntimeException("Could not read the file or folder!");
         }
-        file.delete();
+        return file.delete();
     }
 }
 

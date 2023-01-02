@@ -25,8 +25,6 @@ export class FilesService {
     return  this.http.get<myFile[]>(`${this.baseApiUrl}/folder`, {params:httpParams});
   }
 
-
-
   constructor(private http:HttpClient) {
     this.path$ = new BehaviorSubject<string>('')
     this.files$ = new BehaviorSubject<myFile[]>([])
@@ -60,6 +58,8 @@ export class FilesService {
   }
 
   moveFile(source: string, target: string):Observable<any> {
+
+    console.log(new Date(), source, target)
     const formData = new FormData()
     formData.append('source', source)
     formData.append('target', target)

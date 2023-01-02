@@ -5,6 +5,7 @@ import {FilesService} from '../../files.service'
 
 
 import prettyBytes from 'pretty-bytes';
+import {ToasterService} from "../../toaster/toaster.service";
 
 
 @Component({
@@ -36,7 +37,8 @@ export class DialogUploadButton {
   constructor(
     public dialogRef: MatDialogRef<DialogUploadButton>,
     @Inject(MAT_DIALOG_DATA) public data: {fileList: FileList},
-    private fileService : FilesService
+    private fileService : FilesService,
+    private toaster: ToasterService
   ) {
     this.fileArray = Array.from(this.data.fileList)
   }
@@ -45,7 +47,12 @@ export class DialogUploadButton {
     for (let file of files) {
       console.log(file)
       let a =this.fileService.uploadFile(file)
-      a.subscribe(value => console.log(value))
+      a.subscribe(v => {
+        this.toaster.show("success", "moving files" , v["message"] , 10000)
+        console.log(v)
+      })
     }
+    this.fileService.changeFolder(this.fileService.path$.value)
+    this.dialogRef.close()
   }
 }

@@ -23,6 +23,9 @@ import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatListModule} from "@angular/material/list";
 import {DialogMoveButton, MoveButtonComponent} from './button/move-button/move-button.component';
+import {ToastrModule} from "ngx-toastr";
+import {ToasterContainerComponent} from "./toaster/toaster-container.component";
+import {ToasterComponent} from "./toaster/toaster.component";
 
 
 
@@ -36,7 +39,9 @@ import {DialogMoveButton, MoveButtonComponent} from './button/move-button/move-b
     UploadButtonComponent,
     DialogUploadButton,
     MoveButtonComponent,
-    DialogMoveButton
+    DialogMoveButton,
+    ToasterContainerComponent,
+    ToasterComponent,
   ],
     imports: [
         BrowserModule,
@@ -53,6 +58,9 @@ import {DialogMoveButton, MoveButtonComponent} from './button/move-button/move-b
         FormsModule,
         MatDialogModule,
         MatListModule,
+      ToastrModule.forRoot({
+        positionClass :'toast-bottom-right'
+      })
     ],
   providers: [],
   bootstrap: [AppComponent]

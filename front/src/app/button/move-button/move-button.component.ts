@@ -3,6 +3,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {myFile} from "../../myFile";
 import {FilesService} from "../../files.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ToasterService} from "../../toaster/toaster.service";
 
 @Component({
   selector: 'app-move-button',
@@ -35,7 +36,8 @@ export class DialogMoveButton {
   constructor(
     public dialogRef: MatDialogRef<DialogMoveButton>,
     @Inject(MAT_DIALOG_DATA) public data: {selection: myFile[]},
-    private fileService : FilesService
+    private fileService : FilesService,
+    private toaster: ToasterService
   ) {
     this.splitsPath = []
     this.currentFolder = this.fileService.path$.value
@@ -63,10 +65,15 @@ export class DialogMoveButton {
     if (i && this.fileService.path$.value != i.path && i.path) {
       for (let row of this.data.selection) {
         if (!row.isFolder && row.path) {
-          this.fileService.moveFile(row.path, i.path + '/' + row.name).subscribe(v => console.log(v));
+          this.fileService.moveFile(row.path, i.path + '/' + row.name).subscribe(v =>
+          {
+            this.toaster.show("success", "moving files" , v["message"] , 10000)
+            console.log(v)
+          });
         }
       }
     }
     this.fileService.changeFolder(this.fileService.path$.value);
+    this.dialogRef.close()
   }
 }
