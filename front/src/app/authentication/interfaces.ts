@@ -22,7 +22,7 @@ export interface LoginResponse {
 Interface for the Login Request (can look different, based on your backend api)
 */
 export interface LoginRequest {
-  email: string;
+  username: string;
   password: string;
 }
 

@@ -12,7 +12,7 @@ import { saveAs } from 'file-saver';
 })
 
 export class FilesService {
-  private baseApiUrl = 'http://localhost:8080';  // URL to web api
+  private baseApiUrl = 'http://localhost:8080/api';  // URL to web api
   path$:BehaviorSubject<string>;
   files$:BehaviorSubject<myFile[]>;
 

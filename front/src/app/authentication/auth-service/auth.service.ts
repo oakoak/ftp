@@ -43,35 +43,42 @@ export class AuthService {
    The `..of()..` can be removed if you have a real backend, at the moment, this is just a faked response
   */
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return of(fakeLoginResponse).pipe(
-      tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
-      tap(() => this.snackbar.open('Login Successfull', 'Close', {
-        duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-      }))
-    );
-    // return this.http.post<LoginResponse>('/api/auth/login', loginRequest).pipe(
-    // tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
-    // tap(() => this.snackbar.open('Login Successfull', 'Close', {
-    //  duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-    // }))
+    // return of(fakeLoginResponse).pipe(
+    //   tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
+    //   tap(() => this.snackbar.open('Login Successfull', 'Close', {
+    //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    //   }))
     // );
+    return this.http.post<LoginResponse>('http://localhost:8080/api/auth/signin', loginRequest).pipe(
+    tap((res: LoginResponse) => localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, res.accessToken)),
+    tap(() => this.snackbar.open('Login Successfull', 'Close', {
+     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    }))
+    );
   }
 
   /*
    The `..of()..` can be removed if you have a real backend, at the moment, this is just a faked response
   */
   register(registerRequest: ɵTypedOrUntyped<{ firstname: FormControl<null>; password: FormControl<null>; passwordConfirm: FormControl<null>; email: FormControl<null>; username: FormControl<null>; lastname: FormControl<null> }, ɵFormGroupValue<{ firstname: FormControl<null>; password: FormControl<null>; passwordConfirm: FormControl<null>; email: FormControl<null>; username: FormControl<null>; lastname: FormControl<null> }>, any>): Observable<RegisterResponse> {
-    // TODO
-    return of(fakeRegisterResponse).pipe(
-      tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
-        duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-      })),
-    );
-    // return this.http.post<RegisterResponse>('/api/auth/register', registerRequest).pipe(
-    // tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
-    //  duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
-    // }))
-    // )
+    // // TODO
+    // return of(fakeRegisterResponse).pipe(
+    //   tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
+    //     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    //   })),
+    // );
+
+    // {
+    //   "username":"user",
+    //   "password":"test1111",
+    //   "email":"a@a.com",
+    //   "role":["mod","user"]
+    // }
+    return this.http.post<RegisterResponse>('http://localhost:8080/api/auth/signup', registerRequest).pipe(
+    tap((res: RegisterResponse) => this.snackbar.open(`User created successfully`, 'Close', {
+     duration: 2000, horizontalPosition: 'right', verticalPosition: 'top'
+    }))
+    )
   }
 
   /*
