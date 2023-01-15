@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {FileManagerModule} from './file-manager/file-manager.module'
 import {FileManagerComponent} from './file-manager/file-manager.component'
-import {AppComponent} from "./app.component";
-import {AuthenticationModule} from "./authentication/authentication.module";
 import {AuthGuard} from "./guard/auth.guard";
 
 const routes: Routes = [
   {
-    path:"test",
+    path:"home",
     canActivate: [AuthGuard],
     component: FileManagerComponent
   },
@@ -17,7 +14,6 @@ const routes: Routes = [
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },
   {
-    // Redirects all paths that are not matching to the 'public' route/path
     path: '**',
     redirectTo: 'auth',
     pathMatch: 'full'
@@ -25,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

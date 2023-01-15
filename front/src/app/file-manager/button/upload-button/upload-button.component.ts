@@ -1,17 +1,15 @@
 import {Component, Inject} from '@angular/core';
-import {MatDialogConfig, MatDialogModule} from '@angular/material/dialog';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FilesService} from '../../files.service'
 
 
 import prettyBytes from 'pretty-bytes';
-import {ToasterService} from "../../toaster/toaster.service";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
   selector: 'app-upload-button',
   templateUrl: './upload-button.component.html',
-  styleUrls: ['./upload-button.component.css']
 })
 export class UploadButtonComponent {
   constructor(public dialog: MatDialog) {}
@@ -38,7 +36,7 @@ export class DialogUploadButton {
     public dialogRef: MatDialogRef<DialogUploadButton>,
     @Inject(MAT_DIALOG_DATA) public data: {fileList: FileList},
     private fileService : FilesService,
-    private toaster: ToasterService
+    private toastr: ToastrService,
   ) {
     this.fileArray = Array.from(this.data.fileList)
   }
@@ -48,8 +46,7 @@ export class DialogUploadButton {
       console.log(file)
       let a =this.fileService.uploadFile(file)
       a.subscribe(v => {
-        this.toaster.show("success", "moving files" , v["message"] , 10000)
-        console.log(v)
+        this.toastr.success(v["message"],'Upload files')
       })
     }
     this.fileService.changeFolder(this.fileService.path$.value)

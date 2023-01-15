@@ -16,7 +16,7 @@ export class FileManagerComponent {
   logout() {
     // Removes the jwt token from the local storage, so the user gets logged out & then navigate back to the "public" routes
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.router.navigate(['../../']);
+    this.router.navigate(['/auth']);
   }
 
 

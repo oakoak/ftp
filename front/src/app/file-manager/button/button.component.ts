@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {myFile} from "../myFile";
 import {FilesService} from "../files.service";
-import {ToasterService} from "../toaster/toaster.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-button',
@@ -13,7 +13,8 @@ export class ButtonComponent {
   @Input() selection: SelectionModel<myFile> | undefined;
 
   constructor(private files: FilesService,
-              private toaster: ToasterService) {}
+              private toastr: ToastrService,
+              ) {}
 
     downloadselected () {
     if (this.selection)
@@ -29,7 +30,7 @@ export class ButtonComponent {
       for (let row of this.selection.selected) {
         if (!row.isFolder && row.path) {
           this.files.deleteFile(row.path).subscribe(v => {
-            this.toaster.show("success", "moving files" , v["message"] , 10000)
+            this.toastr.success(v["message"],'Deleting files')
             console.log(v)
           })
         }

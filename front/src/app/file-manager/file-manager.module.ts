@@ -22,9 +22,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatListModule} from "@angular/material/list";
 import {DialogMoveButton, MoveButtonComponent} from './button/move-button/move-button.component';
 import {ToastrModule} from "ngx-toastr";
-import {ToasterContainerComponent} from "./toaster/toaster-container.component";
-import {ToasterComponent} from "./toaster/toaster.component";
-
 
 @NgModule({
   declarations: [
@@ -36,8 +33,6 @@ import {ToasterComponent} from "./toaster/toaster.component";
     DialogUploadButton,
     MoveButtonComponent,
     DialogMoveButton,
-    ToasterContainerComponent,
-    ToasterComponent,
   ],
   imports: [
     CommonModule,
@@ -52,9 +47,6 @@ import {ToasterComponent} from "./toaster/toaster.component";
     FormsModule,
     MatDialogModule,
     MatListModule,
-    ToastrModule.forRoot({
-      positionClass :'toast-bottom-right'
-    })
   ]
 })
 export class FileManagerModule { }
