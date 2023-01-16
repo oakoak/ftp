@@ -1,5 +1,7 @@
 package org.oak.ftpbackend;
 
+import org.oak.ftpbackend.models.FileDTO;
+import org.oak.ftpbackend.repository.FileService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.util.List;
 
 
 @Service
-public class LocalFileService implements FileService{
+public class LocalFileService implements FileService {
     @Override
     public List<FileDTO> getListFiles(String path) {
         File[] listFiles = new File(path).listFiles();

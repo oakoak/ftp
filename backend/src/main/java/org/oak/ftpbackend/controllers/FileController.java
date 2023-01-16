@@ -1,7 +1,7 @@
 package org.oak.ftpbackend.controllers;
 
-import org.oak.ftpbackend.FileDTO;
-import org.oak.ftpbackend.FileService;
+import org.oak.ftpbackend.models.FileDTO;
+import org.oak.ftpbackend.repository.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;

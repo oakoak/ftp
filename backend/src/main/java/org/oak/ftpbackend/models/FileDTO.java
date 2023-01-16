@@ -1,4 +1,4 @@
-package org.oak.ftpbackend;
+package org.oak.ftpbackend.models;
 
 import java.util.Date;
 

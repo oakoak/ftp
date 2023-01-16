@@ -4,13 +4,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/front/dist
-/front/tmp
-/front/out-tsc
-/front/bazel-out
+/frontend/dist
+/frontend/tmp
+/frontend/out-tsc
+/frontend/bazel-out
 
 # Node
-/front/node_modules
+/frontend/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -32,7 +32,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/front/.angular/cache
+/frontend/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
@@ -44,5 +44,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-ftp-backend/target/
-ftp-backend/.mvn/
+backend/target/
+backend/.mvn/
